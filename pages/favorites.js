@@ -1,9 +1,9 @@
 import { Container } from "@chakra-ui/react"
 
-export default function Search() {
+export default function Favorites() {
   return(
     <Container py="6">
-      <h1>Welcome on search page</h1>
+      <h1>Welcome on your favourites cities page</h1>
     </Container>
   ) 
 }
