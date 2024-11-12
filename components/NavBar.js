@@ -3,19 +3,19 @@ import NextLink from "next/link";
 
 export default function NavBar() {
   return (
-    <Box as="nav" bg="gray.800" p={4}>
+    <Box as="nav" bg="blue.400" p={4}>
       <Flex justify="space-around" color="white">
         <NextLink href="/" passHref>
-          <Link>Homepage</Link>
+          <p>Homepage</p>
         </NextLink>
         <NextLink href="/search" passHref>
-          <Link>Search</Link>
+          <p>Search</p>
         </NextLink>
         <NextLink href="/city" passHref>
-          <Link>City</Link>
+          <p>City</p>
         </NextLink>
         <NextLink href="/favorites" passHref>
-          <Link>Favorites</Link>
+          <p>Favorites</p>
         </NextLink>
       </Flex>
     </Box>

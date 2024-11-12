@@ -1,3 +1,9 @@
+import { Container } from "@chakra-ui/react"
+
 export default function City() {
-    return <h1>City Page</h1>;
-  }
+  return(
+    <Container py="6">
+      <h1>Welcome on city page</h1>
+    </Container>
+  ) 
+}

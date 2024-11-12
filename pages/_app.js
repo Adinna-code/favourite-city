@@ -1,20 +1,12 @@
-/* import "@/styles/globals.css";
+import "@/styles/globals.css";
+import { Provider } from "../components/ui/provider"
+import NavBar from "@/components/NavBar";
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
- */
-
-import { ChakraProvider } from "@chakra-ui/react";
-/* import NavBar from "../components/NavBar";
- */
-function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-     {/*  <NavBar /> */}
+    <Provider>
+      <NavBar />
       <Component {...pageProps} />
-    </ChakraProvider>
+    </Provider>
   );
 }
-
-export default MyApp;
