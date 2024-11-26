@@ -11,9 +11,6 @@ export default function NavBar() {
         <NextLink href="/search" passHref>
           <p>Search</p>
         </NextLink>
-        <NextLink href="/city" passHref>
-          <p>City</p>
-        </NextLink>
         <NextLink href="/favorites-page" passHref>
           <p>Favorites</p>
         </NextLink>
