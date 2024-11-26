@@ -1,4 +1,4 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function NavBar() {
@@ -14,7 +14,7 @@ export default function NavBar() {
         <NextLink href="/city" passHref>
           <p>City</p>
         </NextLink>
-        <NextLink href="/favorites" passHref>
+        <NextLink href="/favorites-page" passHref>
           <p>Favorites</p>
         </NextLink>
       </Flex>

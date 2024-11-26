@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Container, Heading, Text, Spinner, Box } from "@chakra-ui/react";
+import { Container, Heading, Text, Spinner, Box, Button } from "@chakra-ui/react";
 
 function WeatherDetails({ weather }) {
     return (
@@ -18,6 +18,7 @@ export default function CityPage() {
     const { cityId } = router.query;
     const [city, setCity] = useState(null);
     const [weather, setWeather] = useState(null)
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         if (!router.isReady) {
@@ -67,6 +68,38 @@ export default function CityPage() {
         fetchCityData();
     }, [router.isReady, cityId]);
 
+    useEffect(() => {
+        const checkFavorite = async () => {
+            const response = await fetch("/api/favorites");
+            const favorites = await response.json();
+            console.log("Favorites from console.log", favorites)
+            
+            if (Array.isArray(favorites)) {
+                const isFav = favorites.some(
+                    (fav) => fav.cityName === city?.name && fav.country === city?.country);
+                setIsFavorite(isFav)
+            } else {
+                console.error("Favorites is not an array", favorites)
+                setIsFavorite(false)
+            }  
+        }
+
+        if (city) checkFavorite()
+    }, [city]);
+
+    const toggleFavorite = async () => {
+        if (!city) return;
+
+        const response = await fetch("/api/favorites", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cityName: city.name, country: city.country})
+        })
+
+        const data = await response.json();
+        setIsFavorite(data.message === "Favorite added");
+    };
+
     if (!city) {
         return (
             <Container p={4} centerContent bg="teal.50" minH="100vh" justifyContent="center">
@@ -87,6 +120,9 @@ export default function CityPage() {
             ) : (
                 <Text mt={4} fontSize="lg" color="gray.600">Loading weather data...</Text>
             )}
+            <Button onClick={toggleFavorite} colorScheme={isFavorite ? "red" : "blue"} mt={6}>
+                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+            </Button>
         </Container>
     )
 }
