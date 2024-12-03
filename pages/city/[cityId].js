@@ -22,50 +22,41 @@ export default function CityPage() {
 
     useEffect(() => {
         if (!router.isReady) {
-            console.log("Router not ready");
             return
         };
 
         if (!cityId) {
-            console.log("Id undefined", cityId);
             return
         }
 
-        const fetchCityData = async () => {
-            const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityId)}&count=1&language=en&format=json`;
-            console.log("Fetching data from API:", apiUrl)
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                console.log("City data fetched:", data)
-
-                if (data.results && data.results.length > 0) {
-                    const cityData = data.results[0];
+        const fetchCity = () => {
+            const apiUrl = `https://geocoding-api.open-meteo.com/v1/get?id=${cityId}&count=1&language=en&format=json`;
+            return fetch(apiUrl)
+                .then(response => response.json())
+                .then(cityData => {
+                    if (!cityData.id) throw new Error(`No city data found for ID: ${cityId}`)
                     setCity(cityData);
-
-                    const weatherApiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${cityData.latitude}&longitude=${cityData.longitude}&current_weather=true`
-                    console.log("Fetching weather data from API:", weatherApiUrl)
-                    const weatherResponse = await fetch(weatherApiUrl)
-                    const weatherData = await weatherResponse.json();
-
-                    if (weatherData.current_weather) {
-                        setWeather({
-                            temperature: weatherData.current_weather.temperature,
-                            windSpeed: weatherData.current_weather.windspeed,
-                            humidity: weatherData.current_weather.humidity || "N/A"
-                        })
-                    } else {
-                        console.error("No weather data found for city:", cityData.name)
-                    }
-                } else {
-                    console.log("No city data found for ID: ", cityId)
-                }
-            } catch (error) {
-                console.error("Error fetching city data:", error);
-            }
+                return cityData;
+            })
+        }
+        const fetchWeather = cityData => {
+            const weatherApiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${cityData.latitude}&longitude=${cityData.longitude}&current_weather=true`
+            return fetch(weatherApiUrl)
+                .then(weatherResponse => weatherResponse.json())
+                .then(weatherData => {
+                    if (!weatherData.current_weather) throw new Error(`No weather data found for city: ${cityData.name}`)
+                    setWeather({
+                        temperature: weatherData.current_weather.temperature,
+                        windSpeed: weatherData.current_weather.windspeed,
+                        humidity: weatherData.current_weather.humidity || "N/A"
+                    })
+                })
         }
 
-        fetchCityData();
+        fetchCity()
+            .then(fetchWeather)
+            .catch(error => console.error(error))
+
     }, [router.isReady, cityId]);
 
     useEffect(() => {
@@ -76,7 +67,7 @@ export default function CityPage() {
             
             if (Array.isArray(favorites)) {
                 const isFav = favorites.some(
-                    (fav) => fav.cityName === city?.name && fav.country === city?.country);
+                    (fav) => fav.cityName === city.name && fav.country === city.country);
                 setIsFavorite(isFav)
             } else {
                 console.error("Favorites is not an array", favorites)
