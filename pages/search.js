@@ -43,7 +43,6 @@ export default function Search() {
             placeholder="Search for a city..."
             value={searchTerm}
             onChange={handleSearch}
-            variant="outline"
             mb={4}
             p={4}
             size="lg"
