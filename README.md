@@ -1,40 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Favorite City App
 
-## Getting Started
+An interactive web application built with [Next.js](https://nextjs.org) and [React](https://reactjs.org) that allows users to search for cities, view details about them, and save their favorite cities for quick access.
 
-First, run the development server:
+## Project Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This application enables users to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Search for cities using an external [geocoding API](https://developer.mapquest.com/documentation/geocoding-api/).
+- View detailed information about a selected city, including weather data.
+- Save cities to a favorites list using [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+- Navigate between pages to explore different cities.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Pages Structure
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **Home Page** - Contains a search bar for looking up cities.
+- **City Page** - Displays detailed information about a specific city, including weather and geographical data.
+- **Favorites Page** - Shows a list of saved favorite cities.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Next.js](https://nextjs.org) for routing and page management.
+- [React](https://reactjs.org) for UI components and state management.
+- [Chakra UI](https://chakra-ui.com) for styling and responsive design.
+- [Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/) for retrieving city details.
+- [Weather API](https://openweathermap.org/api) for fetching weather-related information.
+- [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) for storing favorite cities.
+
+## Installation and Running the Project
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/favorite-city-app.git
+   
+2. Navigate to the project folder:
+
+   ```bash
+   cd favorite-city-app
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+
+4. Run the application:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+
+The application will be available at http://localhost:3000.
+
+## Branch Structure
+
+- main: The stable version of the application.
+- feature/search: Implementation of city search functionality.
+- feature/favorites: Feature branch for managing favorite cities.
+- improvements: Various optimizations and UI enhancements.
+
+## Branch Workflow
+
+1. Create a new branch for a feature:
+
+   ```bash
+   git checkout -b feature/new-feature
+
+2. Commit and push changes:
+
+   ```bash
+   git add .
+   git commit -m "Implemented new feature"
+   git push origin feature/new-feature
+
+3. Open a Pull Request (PR) to merge changes into the main branch.
+4. Once the feature is complete, open a Pull Request (PR) to merge changes into the main branch.
+5. After approval, the feature is included in the main branch.
+
+## Future Improvements
+
+- Implement filtering options for favorite cities.
+- Add user authentication to save favorite cities across devices.
+- Improve UI/UX with better animations and transitions.
+
+## Contributions
+
+Contributions are welcome! Follow these steps to contribute:
+
+- Fork the repository and create a branch for your modifications.
+- Implement changes and commit them with descriptive messages.
+- Submit a Pull Request with a detailed explanation of the improvements.
+
+If you encounter any issues or have suggestions, please open an issue on GitHub! 🚀
 
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Next.js Documentation - learn about Next.js features and API.
+- Learn Next.js - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+You can check out the Next.js GitHub repository - your feedback and contributions are welcome!
