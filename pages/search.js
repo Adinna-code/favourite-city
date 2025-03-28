@@ -16,9 +16,13 @@ export default function Search() {
       return;
     }
 
-    const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${e.target.value}&count=5&language=en&format=json`;
+    const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=en&format=json`;
 
     try {
+      if(!results.length) {
+        setLoading(true);
+      }
+
       const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error('Error fetching data');
@@ -60,7 +64,7 @@ export default function Search() {
           <List.Root spacing={3}>
              {results.map((result) => (
               <List.Item key={result.id} border="1px" borderRadius="md" p={2} bg="white" boxShadow="sm">
-                <Link href={`/city/${encodeURIComponent(result.name)}`} passHref>
+                <Link href={`/city/${result.id}`} passHref>
                   <Text fontWeight="bold" cursor="pointer" _hover={{color: "teal.500"}}>{result.name}, {result.country}
                   </Text>
                 </Link>
